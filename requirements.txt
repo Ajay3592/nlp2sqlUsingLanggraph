@@ -1,0 +1,7 @@
+langchain==0.1.14
+google-generativeai==0.3.2
+streamlit==1.32.0
+langchain_google_genai
+langgraph.prebuilt
+langgraph
+langchain_community
