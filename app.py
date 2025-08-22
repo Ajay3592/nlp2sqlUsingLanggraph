@@ -1,4 +1,4 @@
-# Import required libraries
+# Import the required libraries
 
 import streamlit as st
 import sqlite3
@@ -70,3 +70,4 @@ if st.button("Submit"):
 	st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
