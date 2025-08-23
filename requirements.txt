@@ -1,4 +1,6 @@
 streamlit==1.32.0
+langchain>=0.1.50
 langchain-google-genai==0.0.6
 langchain-community
 langgraph-prebuilt==0.6.4
+
