@@ -49,7 +49,9 @@ can query. Do NOT skip this step.
 
 Then you should query the schema of the most relevant tables.
 """
-prompt = ChatPromptTemplate.from_template(system_prompt)
+prompt = ChatPromptTemplate.from_template(system_prompt).partial(
+    dialect="SQLite", top_k=5
+)
 llm_with_prompt = prompt | llm
 
 agent = initialize_agent(
@@ -86,6 +88,7 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
 
 
 
