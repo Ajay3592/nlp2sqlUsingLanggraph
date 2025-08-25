@@ -8,6 +8,7 @@ from langchain_community.utilities import SQLDatabase
 from langgraph.prebuilt import ToolNode
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langgraph.prebuilt import create_react_agent
+from langchain.agents import initialize_agent, AgentType
 
 # get secrets and initialize LLM
 
@@ -50,10 +51,17 @@ Then you should query the schema of the most relevant tables.
 prompt = ChatPromptTemplate.from_template(system_prompt)
 llm_with_prompt = prompt | llm
 
-agent = create_react_agent(
+agent = initialize_agent(
+    tools,
     llm_with_prompt,
-    tools
+    agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
+    verbose=True
 )
+
+# agent = create_react_agent(
+#     llm_with_prompt,
+#     tools
+# )
 
 
 # Set page config
@@ -73,6 +81,7 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
 
 
 
