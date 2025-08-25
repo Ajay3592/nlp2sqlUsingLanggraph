@@ -48,7 +48,7 @@ can query. Do NOT skip this step.
 Then you should query the schema of the most relevant tables.
 """
 prompt = ChatPromptTemplate.from_template(system_prompt)
-llm_with_prompt = llm.bind(prompt = prompt)
+llm_with_prompt = prompt | llm
 
 agent = create_react_agent(
     llm_with_prompt,
@@ -73,6 +73,7 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
 
 
 
