@@ -3,13 +3,13 @@
 import streamlit as st
 from PIL import Image
 import sqlite3
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.utilities import SQLDatabase
-from langgraph.prebuilt import ToolNode
+from typing import Literal
+from langchain_core.messages import AIMessage
+from langchain_core.runnables import RunnableConfig
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langgraph.prebuilt import create_react_agent
-from langchain.agents import initialize_agent, AgentType
 
 # get secrets and initialize LLM
 
@@ -49,22 +49,10 @@ can query. Do NOT skip this step.
 
 Then you should query the schema of the most relevant tables.
 """
-prompt = ChatPromptTemplate.from_template(system_prompt).partial(
-    dialect="SQLite", top_k=5
-)
-llm_with_prompt = prompt | llm
 
-agent = initialize_agent(
-    tools,
-    llm_with_prompt,
-    agent=AgentType.CHAT_ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True
+agent = create_react_agent(
+    llm, tools, prompt=system_prompt,
 )
-
-# agent = create_react_agent(
-#     llm_with_prompt,
-#     tools
-# )
 
 
 # Set page config
@@ -74,20 +62,21 @@ st.set_page_config(page_title="Natural Language to SQL", layout="centered")
 st.title("NLP2SQL")
 
 image = Image.open("sample_data.jpg")
-st.image(image, caption="List of Tables availble on database", use_column_width=True)
+st.image(image, caption="List of Tables availble on database")
 
 # Input field
-user_input = st.text_input("Type your message...")
+user_input = st.text_input("Type your message here...")
 
 # Submit button
 if st.button("Submit"):
     if user_input:
-        #result = agent.invoke({"messages": [{"role": "user", "content": user_input}]})
-        result = agent.invoke({"input": user_input})
+        result = agent.invoke({"messages": [{"role": "user", "content": user_input}]})
+        #result = agent.invoke({"input": user_input})
         #print(result['messages'][-1].content)
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
 
 
 
