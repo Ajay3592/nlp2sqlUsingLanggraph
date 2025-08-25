@@ -14,7 +14,8 @@ api_key = st.secrets["gemini"]["api_key"]
 llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=api_key)
 
 # Connect to the database
-db = sqlite3.connect('shop.db')
+#db = sqlite3.connect('shop.db')
+db = SQLDatabase.from_uri("sqlite:///shop.db")
 
 # Initialize SQLDatabaseToolkit 
 toolkit = SQLDatabaseToolkit(db=db, llm=llm)
@@ -70,3 +71,4 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
