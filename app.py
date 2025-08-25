@@ -1,6 +1,7 @@
 # Import the required libraries
 
 import streamlit as st
+from PIL import Image
 import sqlite3
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
@@ -70,6 +71,9 @@ st.set_page_config(page_title="Natural Language to SQL", layout="centered")
 # Title
 st.title("NLP2SQL")
 
+image = Image.open("sample_data.jpg")
+st.image(image, caption="List of Tables availble on database", use_column_width=True)
+
 # Input field
 user_input = st.text_input("Type your message...")
 
@@ -81,6 +85,7 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
 
 
 
