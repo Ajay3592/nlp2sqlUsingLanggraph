@@ -65,9 +65,8 @@ user_input = st.text_input("Type your message...")
 # Submit button
 if st.button("Submit"):
     if user_input:
-	result = agent.invoke({"messages": [{"role": "user", "content": user_input}]})
-	print(result['messages'][-1].content)
-	st.write(result['messages'][-1].content)
+        result = agent.invoke({"messages": [{"role": "user", "content": user_input}]})
+        print(result['messages'][-1].content)
+        st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
-
