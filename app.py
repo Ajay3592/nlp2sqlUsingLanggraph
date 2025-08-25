@@ -51,7 +51,9 @@ Then you should query the schema of the most relevant tables.
 """
 
 agent = create_react_agent(
-    llm, tools, prompt=system_prompt,
+    llm,
+    tools,
+    prompt=system_prompt,
 )
 
 
@@ -76,6 +78,7 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
 
 
 
