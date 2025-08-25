@@ -3,6 +3,7 @@
 import streamlit as st
 import sqlite3
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.utilities import SQLDatabase
 from langgraph.prebuilt import ToolNode
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
@@ -46,11 +47,12 @@ can query. Do NOT skip this step.
 
 Then you should query the schema of the most relevant tables.
 """
+prompt = ChatPromptTemplate.from_template(system_prompt)
+llm_with_prompt = llm.bind(prompt)
 
 agent = create_react_agent(
-    llm,
-    tools,
-    prompt=system_prompt,
+    llm_with_prompt,
+    tools
 )
 
 
@@ -71,4 +73,5 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
 
