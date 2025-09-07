@@ -1,5 +1,8 @@
 # 🧠 Natural Language SQL Query App with LangGraph + Gemini + Streamlit
 
+deployed at https://nlp2sqlusinglanggraph.streamlit.app/
+
+
 This Streamlit application allows users to query a SQLite database using natural language. It leverages the power of **LangGraph**, **Gemini 2.0 Flash**, and **LangChain's SQLDatabaseToolkit** to interpret user questions and generate accurate SQL responce.
 
 ---
@@ -51,3 +54,4 @@ Multi-DB Support Extend the app to support multiple database backends (PostgreSQ
 Query History & Export Add support for saving query history and exporting results to CSV or Excel.
 
 Authentication & Access Control Integrate user login and permission layers to secure database access.
+
