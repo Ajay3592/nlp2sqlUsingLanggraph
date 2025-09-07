@@ -7,4 +7,6 @@ google-generativeai==0.3.2
 langchain==0.1.14
 langgraph
 Pillow
-
+langchain-openai==0.3.32
+openai==1.106.1
+httpx==0.28.1
