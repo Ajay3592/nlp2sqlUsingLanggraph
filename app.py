@@ -7,13 +7,13 @@ from langchain_community.utilities import SQLDatabase
 from typing import Literal
 from langchain_core.messages import AIMessage
 from langchain_core.runnables import RunnableConfig
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
 from langgraph.prebuilt import create_react_agent
 
 # get secrets and initialize LLM
-
 openai_key = st.secrets["openai"]["api_key"]
+
 # LLM setup
 llm = ChatOpenAI(model_name="gpt-4", temperature=0.7, api_key=openai_key)
 
@@ -79,3 +79,4 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
+
