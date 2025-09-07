@@ -68,7 +68,7 @@ image = Image.open("sample_data.jpg")
 st.image(image, caption="List of Tables availble on database")
 
 # Input field
-user_input = st.text_input("Type your message here...")
+user_input = st.text_input("Type your natural language sql query here...")
 
 # Submit button
 if st.button("Submit"):
@@ -78,5 +78,6 @@ if st.button("Submit"):
         #print(result['messages'][-1].content)
         st.write(result['messages'][-1].content)
     else:
-        st.warning("Please enter a message before submitting.")
+        st.warning("Please enter a query before submitting.")
+
 
