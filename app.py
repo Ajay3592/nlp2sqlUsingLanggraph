@@ -13,8 +13,9 @@ from langgraph.prebuilt import create_react_agent
 
 # get secrets and initialize LLM
 
-api_key = st.secrets["gemini"]["api_key"]
-llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=api_key)
+openai_key = st.secrets["openai"]["api_key"]
+# LLM setup
+llm = ChatOpenAI(model_name="gpt-4", temperature=0.7, api_key=openai_key)
 
 # Connect to the database
 #db = sqlite3.connect('shop.db')
@@ -78,13 +79,3 @@ if st.button("Submit"):
         st.write(result['messages'][-1].content)
     else:
         st.warning("Please enter a message before submitting.")
-
-
-
-
-
-
-
-
-
-
